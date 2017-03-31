@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Term:</strong>
+  <%= @search.term %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @search.location %>
+</p>
+
+<% unless @businesses.nil? %>
+  <% for result in @businesses %>
+    <p><%= result[:name] %></p>
+    <%for line in result[:address]%>
+      <p><%= line.to_s%><p>
+    <% end %>
+
+    <p><%= result[:phone] %></p>
+    <p><%= result[:price] %></p>
+
+    <a><%= link_to result[:yelp_url],result[:yelp_url] %></a>
+    <%= image_tag(result[:image]) %>
+    <hr/>
+  <% end %>
+<%end%>
+
+<%= link_to 'Edit', edit_search_path(@search) %> |
+<%= link_to 'Back', searches_path %>
