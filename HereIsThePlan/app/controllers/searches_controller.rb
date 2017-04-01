@@ -41,7 +41,7 @@ def search(term, location)
   params = {
     term: term,
     location: location,
-    limit: 20
+    limit: 3
   }
 
   response = HTTP.auth(bearer_token).get(url, params: params)
@@ -52,6 +52,9 @@ def package_results(response)
   unless response.nil?
     businesses = []
     results = response['businesses']
+    if results.nil?
+      return nil
+    end
     for result in results do
       business = []
       name = result['name']
@@ -61,9 +64,12 @@ def package_results(response)
       hash_business = hash_info(name, address, phone, price, image, yelp_url)
       businesses.push(hash_business)
     end
+    if businesses.empty?
+      return nil
+    end
     return businesses
   else
-    return []
+    return nil
   end
 end
 
@@ -77,10 +83,10 @@ end
 
 
 class SearchesController < ApplicationController
-  before_action :set_search, only: [:show, :edit, :update, :destroy]
-
-  # GET /searches
-  # GET /searches.json
+  before_action :set_search, only: [:show, :destroy]
+  #
+  # # GET /searches
+  # # GET /searches.json
   def index
     @searches = Search.all
   end
@@ -89,7 +95,14 @@ class SearchesController < ApplicationController
   # GET /searches/1.json
   def show
     @businesses = package_results(search(@search.term, @search.location))
+    if @businesses.nil?
+      #format.json { redirect_to new_search_path, notice: 'No options available with particular request' }
 
+      redirect_to home_url, notice: 'Plan Cannot Be Made with Given Information'
+    else
+      @businesses
+      #@search = Search.new
+    end
   end
 
   # GET /searches/new
@@ -97,23 +110,18 @@ class SearchesController < ApplicationController
     @search = Search.new
   end
 
-  # GET /searches/1/edit
-  def edit
-  end
-
   # POST /searches
   # POST /searches.json
   def create
     @search = Search.new(search_params)
-
     respond_to do |format|
       if @search.save
         @results = search(@search.term, @search.location)
-        if @results == false
-          format.html { render :new }
+        if @results == nil
+          format.html { render :new, notice: 'No options available with particular request' }
           format.json { redirect_to :new, notice: 'No options available with particular request' }
         else
-          format.html { redirect_to @search, notice: 'Search was successfully created.' }
+          format.html { redirect_to @search, notice: '' }
           format.json { render :show, status: :created, location: @search }
         end
       else
@@ -123,29 +131,16 @@ class SearchesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /searches/1
-  # PATCH/PUT /searches/1.json
-  def update
-    respond_to do |format|
-      if @search.update(search_params)
-        format.html { redirect_to @search, notice: 'Search was successfully updated.' }
-        format.json { render :show, status: :ok, location: @search }
-      else
-        format.html { render :edit }
-        format.json { render json: @search.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /searches/1
   # DELETE /searches/1.json
-  def destroy
-    @search.destroy
-    respond_to do |format|
-      format.html { redirect_to searches_url, notice: 'Search was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @search.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to searches_url, notice: 'Search was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

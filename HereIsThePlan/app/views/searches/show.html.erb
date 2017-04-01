@@ -1,30 +1,58 @@
-<p id="notice"><%= notice %></p>
+<h1>Here's The Plan.</h1>
 
-<p>
-  <strong>Term:</strong>
-  <%= @search.term %>
-</p>
+<h3>
+  You searched for
+  <%= @search.term + ' in ' +  @search.location + '.'%>
+</h3>
 
-<p>
-  <strong>Location:</strong>
-  <%= @search.location %>
-</p>
+
 
 <% unless @businesses.nil? %>
   <% for result in @businesses %>
-    <p><%= result[:name] %></p>
-    <%for line in result[:address]%>
-      <p><%= line.to_s%><p>
-    <% end %>
+    <div class='result-div'>
 
-    <p><%= result[:phone] %></p>
-    <p><%= result[:price] %></p>
+      <h2><%= result[:name] %></h2>
+      <div class="result-image">
+        <% if result[:image] == ''%>
+          <%= image_tag('no-image.png') %>
+        <% else %>
+          <%= image_tag(result[:image]) %>
+        <% end %>
+      </div>
 
-    <a><%= link_to result[:yelp_url],result[:yelp_url] %></a>
-    <%= image_tag(result[:image]) %>
-    <hr/>
+      <div class='result-txt'>
+
+        <dl>
+          <dt>Address:</dt>
+            <dd><%for line in result[:address]%>
+                 <%= line.to_s%>
+               <% end %>
+            </dd>
+          <dt>Phone Number:</dt>
+          <% if result[:phone] == "" %>
+            <dd>No Phone Number Available</dd>
+          <% else %>
+            <dd><%= result[:phone] %></dd>
+          <% end %>
+          <dt>Price:</dt>
+          <% if result[:price].nil? %>
+            <dd>Price Estimate Not Available</dd>
+          <% else %>
+            <dd> <%= result[:price] %></dd>
+          <% end %>
+          <dt>More Information:</dt>
+            <dd><a><%= link_to result[:name] + '- Yelp Link',result[:yelp_url] %></dd>
+        </dl>
+      </div>
+    </div>
+
+
+
+    <br/>
+
   <% end %>
 <%end%>
 
-<%= link_to 'Edit', edit_search_path(@search) %> |
-<%= link_to 'Back', searches_path %>
+<h3>There's the plan. Now go do it, you won't.</h3>
+<h3>Or...</h3>
+<h3><%= link_to 'Make Another Search', home_url %></h3>

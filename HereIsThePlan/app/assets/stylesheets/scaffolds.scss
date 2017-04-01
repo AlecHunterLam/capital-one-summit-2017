@@ -23,13 +23,8 @@ pre {
 a {
   color: #000;
 
-  &:visited {
-    color: #666;
-  }
-
   &:hover {
     color: #fff;
-    background-color: #000;
   }
 }
 
@@ -86,4 +81,8 @@ div {
 
 label {
   display: block;
+}
+
+h1 {
+  word-wrap: break-word;
 }
