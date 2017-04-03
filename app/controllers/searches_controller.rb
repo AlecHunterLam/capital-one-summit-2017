@@ -113,6 +113,7 @@ class SearchesController < ApplicationController
   # POST /searches
   # POST /searches.json
   def create
+    Search.create
     @search = Search.new(search_params)
     respond_to do |format|
       if @search.save
