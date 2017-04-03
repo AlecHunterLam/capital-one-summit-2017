@@ -1,0 +1,136 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+  background-image: url("background.jpg");
+  color:white;
+  font-family: 'Exo', sans-serif;
+}
+
+a {
+  color:crimson;
+}
+
+.result-image {
+  width:300px;
+  float: right;
+}
+
+.result-div {
+
+  background-image: url("result-background.jpg");
+  box-shadow: 1px 1px 10px white;
+  padding: 20px;
+  padding-top: 5px;
+}
+
+.result-image img {
+  max-height: 200px;
+  width: 70%;
+  display: inline-block;
+  border-radius: 5px;
+  margin: auto;
+  float:right;
+
+}
+
+.result-text {
+  width: 10%;
+  float:left;
+  display: inline-block;
+
+}
+
+h1 {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  margin-top: 8%;
+}
+
+label {
+  text-align: center;
+}
+
+input {
+  width:50%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+h3 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+dd {
+  padding-bottom: 15px;
+}
+
+dd:hover {
+  color:crimson;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color:white;
+  background-color: none;
+}
+
+h3>a {
+  color:crimson;
+}
+
+#description p{
+  text-align: center;
+}
+
+#notice {
+  color:crimson;
+  text-align: center;
+}
+
+footer {
+  background-image: url("result-background.jpg");
+  box-shadow: 1px 1px 10px white;
+  padding: 3px;
+}
+
+footer h3 {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+footer p{
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.actions input {
+  background-color: #A9A9A9;
+  border: groove 2px white;
+  font-family: 'Exo', sans-serif;
+}

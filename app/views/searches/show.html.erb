@@ -1,0 +1,58 @@
+<h1>Here's The Plan.</h1>
+
+<h3>
+  You searched for
+  <%= @search.term + ' in ' +  @search.location + '.'%>
+</h3>
+
+
+
+<% unless @businesses.nil? %>
+  <% for result in @businesses %>
+    <div class='result-div'>
+
+      <h2><%= result[:name] %></h2>
+      <div class="result-image">
+        <% if result[:image] == ''%>
+          <%= image_tag('no-image.png') %>
+        <% else %>
+          <%= image_tag(result[:image]) %>
+        <% end %>
+      </div>
+
+      <div class='result-txt'>
+
+        <dl>
+          <dt>Address:</dt>
+            <dd><%for line in result[:address]%>
+                 <%= line.to_s%>
+               <% end %>
+            </dd>
+          <dt>Phone Number:</dt>
+          <% if result[:phone] == "" %>
+            <dd>No Phone Number Available</dd>
+          <% else %>
+            <dd><%= result[:phone] %></dd>
+          <% end %>
+          <dt>Price:</dt>
+          <% if result[:price].nil? %>
+            <dd>Price Estimate Not Available</dd>
+          <% else %>
+            <dd> <%= result[:price] %></dd>
+          <% end %>
+          <dt>More Information:</dt>
+            <dd><a><%= link_to result[:name] + '- Yelp Link',result[:yelp_url] %></dd>
+        </dl>
+      </div>
+    </div>
+
+
+
+    <br/>
+
+  <% end %>
+<%end%>
+
+<h3>There's the plan. Now go do it, you won't.</h3>
+<h3>Or...</h3>
+<h3><%= link_to 'Make Another Search', home_url %></h3>
