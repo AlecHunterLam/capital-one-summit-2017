@@ -134,3 +134,8 @@ footer p{
   border: groove 2px white;
   font-family: 'Exo', sans-serif;
 }
+
+label {
+  font-size: 175%;
+  margin: 20px;
+}
