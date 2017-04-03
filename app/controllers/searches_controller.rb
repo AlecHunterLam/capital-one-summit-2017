@@ -107,7 +107,7 @@ class SearchesController < ApplicationController
 
   # GET /searches/new
   def new
-    @search = Search.new
+    @search = Search.new()
   end
 
   # POST /searches
