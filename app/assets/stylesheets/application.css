@@ -15,8 +15,8 @@
  */
 
 body {
-  background-image: url("background.jpg");
-  color:green;
+  background-image: url("../images/background.jpg");
+  color:white;
   font-family: 'Exo', sans-serif;
 }
 
