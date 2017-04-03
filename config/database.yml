@@ -12,7 +12,7 @@ default: &default
 development:
   username: capitalone
   adapter: postgresql
-  database: hereistheplan_development
+  database: Hobby_dev
   pool: 5
   timeout: 5000
 # Warning: The database defined as "test" will be erased and
